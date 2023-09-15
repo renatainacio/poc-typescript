@@ -4,6 +4,8 @@ import httpStatus from "http-status";
 
 export default function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
     
+    console.log(error);
+
     if (error.type === "invalidFormat")
         return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);
 
