@@ -12,6 +12,9 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "http-status": "^1.7.0",
+    "httpstatus": "^1.0.0",
+    "joi": "^17.10.1",
     "pg": "^8.11.3"
   },
   "name": "poc-typescript",
@@ -19,7 +22,7 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
