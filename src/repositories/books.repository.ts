@@ -1,5 +1,6 @@
 import { db } from "@/configs/database.connection";
 import { Book, NewBook } from "@/protocols/book";
+import QueryString from "qs";
 
 async function create(book: NewBook): Promise<void>{
     await db.query(`
@@ -7,10 +8,13 @@ async function create(book: NewBook): Promise<void>{
     `, [book.title, book.author, book.pages]);
 }
 
-async function getAllBooks(): Promise<Book[]>{
+async function getAllBooks(name: string | QueryString.ParsedQs | string[] | QueryString.ParsedQs[]): Promise<Book[]>{
+    let sql = "";
+    if (name)
+        sql += "WHERE title ILIKE $1";
     const books = await db.query(`
-        SELECT * FROM books;
-    `);
+        SELECT * FROM books ${sql};
+    `, sql ? [`%${name}%`] : []);
     return books.rows;
 }
 

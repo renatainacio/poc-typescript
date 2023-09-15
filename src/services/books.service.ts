@@ -1,14 +1,15 @@
 import { notFoundError } from "@/errors/notFound";
 import { Book, NewBook } from "@/protocols/book";
 import booksRepository from "@/repositories/books.repository";
+import QueryString from "qs";
 
 
 async function create(book: NewBook){
     await booksRepository.create(book);
 }
 
-async function getAllBooks(): Promise<Book[]>{
-    const books = await booksRepository.getAllBooks();
+async function getAllBooks(name: string | QueryString.ParsedQs | string[] | QueryString.ParsedQs[]): Promise<Book[]>{
+    const books = await booksRepository.getAllBooks(name);
     return books;
 }
 

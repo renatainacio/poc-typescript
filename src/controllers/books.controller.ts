@@ -9,7 +9,8 @@ async function create(req: Request, res: Response){
 }
 
 async function getAllBooks(req: Request, res: Response){
-    const books = await booksService.getAllBooks();
+    const { name } = req.query;
+    const books = await booksService.getAllBooks(name);
     res.send(books);
 }
 
